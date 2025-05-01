@@ -29,4 +29,4 @@ FunZone is an interactive web app with quizzes, jokes, an image carousel, and a 
 - cd FunZone
 - Open index.html in your browser.
 
-## Feel free to update the repository link and make any changes to better suit your needs!
+Feel free to update the repository link and make any changes to better suit your needs!
