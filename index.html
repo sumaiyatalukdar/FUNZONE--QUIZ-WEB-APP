@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FunZone</title>
+  <style>
+    :root {
+      --card-bg: #ffffff;
+      --text-color: #333;
+      --bg-color: #f0f4f8;
+    }
+
+    [data-theme="dark"] {
+      --card-bg: #2c2c2c;
+      --text-color: #f1f1f1;
+      --bg-color: #121212;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #6c63ff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      width: 100%;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .toggle-theme {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      width: 90%;
+      margin-top: 40px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      color: var(--text-color);
+    }
+
+    .feature-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card img {
+      width: 60px;
+      margin-bottom: 10px;
+      animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .avatar {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    @media screen and (max-width: 600px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎉 Welcome to FunZone</h1>
+    <p>Explore fun games and challenges!</p>
+    <button class="toggle-theme" onclick="toggleTheme()">🌓</button>
+  </header>
+
+  <div class="features-grid">
+    <a class="feature-card" href="quiz.html">
+     
+      <h3>🧠 Brain Quiz</h3>
+    </a>
+    <a class="feature-card" href="jokes.html">
+      
+      <h3>😂 Jokes</h3>
+    </a>
+    <a class="feature-card" href="carousel.html">
+      
+      <h3>📸 Image Carousel</h3>
+    </a>
+    <a class="feature-card" href="leaderboard.html">
+      
+      <h3>🏆 Leaderboard</h3>
+    </a>
+  </div>
+
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+  <img class="avatar" src="avatar.png" alt="Your Avatar"/>
+
+  <script>
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.getElementById('clickSound').play();
+      });
+    });
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</body>
+</html>
